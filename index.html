@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
   <title>Window Crew Quote Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -10,145 +10,152 @@
       max-width: 500px;
       margin: auto;
     }
-    input, select, button {
-      margin: 8px 0;
-      padding: 8px;
+    label {
+      display: block;
+      margin-top: 12px;
+    }
+    input, select {
       width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      box-sizing: border-box;
     }
-    h2 {
-      margin-top: 30px;
+    button {
+      margin-top: 20px;
+      padding: 10px;
+      width: 100%;
+      background-color: #00aaff;
+      color: white;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
     }
-    #saveStatus {
-      margin-top: 10px;
-      color: green;
+    #quoteOutput {
+      margin-top: 20px;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
+  <h2>Window Crew Quote Calculator</h2>
+  
+  <form id="quoteForm">
+    <!-- CRM Fields -->
+    <label for="customer">Customer / Company Name:</label>
+    <input type="text" name="entry.444104592" id="customer" required>
 
-  <h1>The Window Crew</h1>
-  <p>“We won’t install ‘em… but we do clean ‘em!”</p>
+    <label for="address">Address:</label>
+    <input type="text" name="entry.1843034712" id="address" required>
 
-  <label>Standard Panes</label>
-  <input type="number" id="standard" value="0">
+    <label for="contact">Contact Info (Phone or Email):</label>
+    <input type="text" name="entry.1578505655" id="contact" required>
 
-  <label>Large Panes</label>
-  <input type="number" id="large" value="0">
+    <!-- Quote Inputs -->
+    <label for="standard-panes">Standard Panes:</label>
+    <input type="number" name="entry.823020867" id="standard-panes" required>
 
-  <label>Screens to Clean</label>
-  <input type="number" id="screensClean" value="0">
+    <label for="large-panes">Large Panes:</label>
+    <input type="number" name="entry.1634670750" id="large-panes" required>
 
-  <label>Screens to Restore</label>
-  <input type="number" id="screensRestore" value="0">
+    <label for="screens-clean">Screens to Clean:</label>
+    <input type="number" name="entry.1503289555" id="screens-clean" required>
 
-  <label>Window Condition</label>
-  <select id="condition">
-    <option value="Light">Light (Only Maintenance Clean Needed)</option>
-    <option value="Moderate">Moderate Grime (+4%)</option>
-    <option value="Heavy">Heavy Grime/Paint (+8%)</option>
-    <option value="Construction">Construction Debris (+15%)</option>
-  </select>
+    <label for="screens-restore">Screens to Restore:</label>
+    <input type="number" name="entry.2096928728" id="screens-restore" required>
 
-  <label>Service Frequency</label>
-  <select id="frequency">
-    <option value="One-off">One-off</option>
-    <option value="Biannual">Biannual (-10%)</option>
-    <option value="Quarterly">Quarterly (-15%)</option>
-  </select>
+    <label for="window-condition">Window Condition:</label>
+    <select name="entry.1179846798" id="window-condition" required>
+      <option value="Good">Good</option>
+      <option value="Moderate">Moderate Grime/Hard Water Spots</option>
+      <option value="Heavy">Heavy Grime/Paint/Stickers</option>
+      <option value="Construction">Construction Debris</option>
+    </select>
 
-  <label>Sides Cleaned</label>
-  <select id="sides">
-    <option value="Both">Both</option>
-    <option value="Inside Only">Inside Only (-30%)</option>
-    <option value="Outside Only">Outside Only (-30%)</option>
-  </select>
+    <label for="service-frequency">Service Frequency:</label>
+    <select name="entry.312555390" id="service-frequency" required>
+      <option value="One-off">One-off</option>
+      <option value="Twice a Year">Twice a Year (10% off)</option>
+      <option value="Quarterly">Quarterly (15% off)</option>
+    </select>
 
-  <label>Story Height</label>
-  <select id="height">
-    <option value="1">1 Story (No Adjustment)</option>
-    <option value="2">2 Story (+20%)</option>
-  </select>
+    <label for="sides-cleaned">Sides Cleaned:</label>
+    <select name="entry.517640240" id="sides-cleaned" required>
+      <option value="Both">Both</option>
+      <option value="Outside Only">Outside Only</option>
+      <option value="Inside Only">Inside Only</option>
+    </select>
 
-  <label>Hard Water Removal?</label>
-  <select id="hardwater">
-    <option value="No">No</option>
-    <option value="Yes">Yes (+10%)</option>
-  </select>
+    <label for="story-height">Story Height:</label>
+    <select name="entry.1578505655" id="story-height" required>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3+">3+</option>
+    </select>
 
-  <h2>Total Quote: $<span id="quote">0.00</span></h2>
+    <label for="hard-water">Hard Water Removal?</label>
+    <select name="entry.1843034712" id="hard-water" required>
+      <option value="no">No</option>
+      <option value="yes">Yes</option>
+    </select>
 
-  <button onclick="calculateQuote()">Calculate</button>
-  <button onclick="saveQuote()">Save Quote</button>
-  <div id="saveStatus"></div>
+    <!-- Hidden Field for Final Quote Total -->
+    <input type="hidden" name="entry.444104592" id="quote-total" />
+
+    <button type="button" onclick="calculateQuote()">Calculate Quote</button>
+    <div id="quoteOutput"></div>
+  </form>
 
   <script>
     function calculateQuote() {
-      const standard = parseFloat(document.getElementById("standard").value) || 0;
-      const large = parseFloat(document.getElementById("large").value) || 0;
-      const screensClean = parseFloat(document.getElementById("screensClean").value) || 0;
-      const screensRestore = parseFloat(document.getElementById("screensRestore").value) || 0;
-      const condition = document.getElementById("condition").value;
-      const frequency = document.getElementById("frequency").value;
-      const sides = document.getElementById("sides").value;
-      const height = document.getElementById("height").value;
-      const hardwater = document.getElementById("hardwater").value;
+      const standard = parseInt(document.getElementById("standard-panes").value) || 0;
+      const large = parseInt(document.getElementById("large-panes").value) || 0;
+      const screensClean = parseInt(document.getElementById("screens-clean").value) || 0;
+      const screensRestore = parseInt(document.getElementById("screens-restore").value) || 0;
+      const condition = document.getElementById("window-condition").value;
+      const frequency = document.getElementById("service-frequency").value;
+      const sides = document.getElementById("sides-cleaned").value;
+      const hardWater = document.getElementById("hard-water").value;
 
-      let total = (standard * 10) + (large * 16) + (screensClean * 2) + (screensRestore * 3);
+      let total = (standard * 10) + (large * 16) + (screensClean * 3) + (screensRestore * 6);
 
-      // Condition adjustment
-      if (condition === "Moderate") total *= 1.04;
-      else if (condition === "Heavy") total *= 1.08;
-      else if (condition === "Construction") total *= 1.15;
+      // Window condition adjustment
+      if (condition === "Moderate") total *= 1.02;
+      else if (condition === "Heavy") total *= 1.04;
+      else if (condition === "Construction") total *= 1.06;
 
       // Frequency discount
-      if (frequency === "Biannual") total *= 0.9;
+      if (frequency === "Twice a Year") total *= 0.9;
       else if (frequency === "Quarterly") total *= 0.85;
 
-      // Sides cleaned discount
-      if (sides === "Inside Only" || sides === "Outside Only") total *= 0.7;
+      // Hard water add-on
+      if (hardWater === "yes") total += 25;
 
-      // Story height adjustment
-      if (height === "2") total *= 1.20;
+      total = total.toFixed(2);
 
-      // Hard water adjustment
-      if (hardwater === "Yes") total *= 1.10;
+      document.getElementById("quoteOutput").textContent = "Estimated Quote: $" + total;
+      document.getElementById("quote-total").value = total;
 
-      document.getElementById("quote").innerText = total.toFixed(2);
+      // Submit to Google Form
+      submitForm();
     }
 
-    function saveQuote() {
-      calculateQuote(); // ensure latest value is saved
-
-      const formData = new URLSearchParams();
-
-      // Map form inputs to Google Form field entry IDs
-      formData.append("entry.823208067", document.getElementById("standard").value);         // Standard Panes
-      formData.append("entry.1634670750", document.getElementById("large").value);           // Large Panes
-      formData.append("entry.1503289555", document.getElementById("screensClean").value);    // Screens to Clean
-      formData.append("entry.2096928728", document.getElementById("screensRestore").value);  // Screens to Restore
-      formData.append("entry.1179846798", document.getElementById("condition").value);       // Window Condition
-      formData.append("entry.312555390", document.getElementById("frequency").value);        // Service Frequency
-      formData.append("entry.517640240", document.getElementById("sides").value);            // Sides Cleaned
-      formData.append("entry.1578505655", document.getElementById("height").value);          // Story Height
-      formData.append("entry.1843034712", document.getElementById("hardwater").value);       // Hard Water Removal
-      formData.append("entry.444104592", document.getElementById("quote").innerText);        // Total Quote
+    function submitForm() {
+      const form = document.getElementById("quoteForm");
+      const formData = new FormData(form);
 
       fetch("https://docs.google.com/forms/d/e/1FAIpQLSfnlHSL3hgL6tLEMw-DXjM_xdvTlSVkMOiq8ZzxWhUgdOnm5Q/formResponse", {
         method: "POST",
         mode: "no-cors",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: formData.toString()
-      })
-      .then(() => {
-        document.getElementById("saveStatus").innerText = "✅ Quote saved via Google Form!";
-      })
-      .catch((err) => {
-        document.getElementById("saveStatus").innerText = "❌ Error saving to Google Form.";
-        console.error(err);
+        body: formData
+      }).then(() => {
+        alert("Quote submitted successfully!");
+        form.reset();
+        document.getElementById("quoteOutput").textContent = "";
+      }).catch(() => {
+        alert("Failed to submit. Please try again.");
       });
     }
   </script>
 </body>
 </html>
+
