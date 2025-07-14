@@ -38,7 +38,7 @@
 </head>
 <body>
   <h2>Window Crew Quote Calculator</h2>
-
+  
   <form id="quoteForm">
     <!-- CRM Fields -->
     <label for="customer">Customer / Company Name:</label>
@@ -117,13 +117,16 @@
 
       let total = (standard * 10) + (large * 16) + (screensClean * 3) + (screensRestore * 6);
 
+      // Window condition adjustment
       if (condition === "Moderate") total *= 1.02;
       else if (condition === "Heavy") total *= 1.04;
       else if (condition === "Construction") total *= 1.06;
 
+      // Frequency discount
       if (frequency === "Twice a Year") total *= 0.9;
       else if (frequency === "Quarterly") total *= 0.85;
 
+      // Hard water add-on
       if (hardWater === "yes") total += 25;
 
       total = total.toFixed(2);
@@ -131,6 +134,7 @@
       document.getElementById("quoteOutput").textContent = "Estimated Quote: $" + total;
       document.getElementById("quote-total").value = total;
 
+      // Submit to Google Form
       submitForm();
     }
 
