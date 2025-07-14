@@ -38,17 +38,17 @@
 </head>
 <body>
   <h2>Window Crew Quote Calculator</h2>
-  
+
   <form id="quoteForm">
     <!-- CRM Fields -->
     <label for="customer">Customer / Company Name:</label>
-    <input type="text" name="entry.444104592" id="customer" required>
+    <input type="text" name="entry.1932766726" id="customer" required>
 
     <label for="address">Address:</label>
-    <input type="text" name="entry.1843034712" id="address" required>
+    <input type="text" name="entry.396915930" id="address" required>
 
     <label for="contact">Contact Info (Phone or Email):</label>
-    <input type="text" name="entry.1578505655" id="contact" required>
+    <input type="text" name="entry.1239873862" id="contact" required>
 
     <!-- Quote Inputs -->
     <label for="standard-panes">Standard Panes:</label>
@@ -113,21 +113,17 @@
       const screensRestore = parseInt(document.getElementById("screens-restore").value) || 0;
       const condition = document.getElementById("window-condition").value;
       const frequency = document.getElementById("service-frequency").value;
-      const sides = document.getElementById("sides-cleaned").value;
       const hardWater = document.getElementById("hard-water").value;
 
       let total = (standard * 10) + (large * 16) + (screensClean * 3) + (screensRestore * 6);
 
-      // Window condition adjustment
       if (condition === "Moderate") total *= 1.02;
       else if (condition === "Heavy") total *= 1.04;
       else if (condition === "Construction") total *= 1.06;
 
-      // Frequency discount
       if (frequency === "Twice a Year") total *= 0.9;
       else if (frequency === "Quarterly") total *= 0.85;
 
-      // Hard water add-on
       if (hardWater === "yes") total += 25;
 
       total = total.toFixed(2);
@@ -135,7 +131,6 @@
       document.getElementById("quoteOutput").textContent = "Estimated Quote: $" + total;
       document.getElementById("quote-total").value = total;
 
-      // Submit to Google Form
       submitForm();
     }
 
@@ -158,4 +153,3 @@
   </script>
 </body>
 </html>
-
