@@ -94,7 +94,7 @@
     <label for="story-height">Story Height:</label>
     <select name="entry.1578550565" id="story-height" required>
       <option value="1">1 (no change)</option>
-      <option value="2">2 (+20%)</option>
+      <option value="2">2 (+12%)</option>
       <option value="3+">3+ (+25%)</option>
     </select>
 
@@ -141,7 +141,7 @@
       if (sides === "Inside Only" || sides === "Outside Only") total *= 0.7;
 
       // Story height adjustment
-      if (height === "2") total *= 1.20;
+      if (height === "2") total *= 1.12;
       else if (height === "3+") total *= 1.25;
 
       // Hard water adjustment
