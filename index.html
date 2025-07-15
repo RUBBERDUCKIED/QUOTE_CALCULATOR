@@ -71,10 +71,10 @@
 
     <label for="window-condition">Window Condition:</label>
     <select name="entry.1179846798" id="window-condition" required>
-      <option value="Good">Good (no change)</option>
-      <option value="Moderate">Moderate Grime/Hard Water Spots (+4%)</option>
-      <option value="Heavy">Heavy Grime/Paint/Stickers (+8%)</option>
-      <option value="Construction">Construction Debris (+15%)</option>
+      <option value="Just Maintenance Clean Needed">Good (no change)</option>
+      <option value="Moderate">Moderately Dirty (+10%)</option>
+      <option value="Heavy">Heavily Soiled with potential Stubborn Spots (+20%)</option>
+      <option value="Construction">Construction Debris (+30%)</option>
     </select>
 
     <label for="service-frequency">Service Frequency:</label>
@@ -92,7 +92,7 @@
     </select>
 
     <label for="story-height">Story Height:</label>
-    <select name="entry.1578505655" id="story-height" required>
+    <select name="entry.396915930" id="story-height" required>
       <option value="1">1 (no change)</option>
       <option value="2">2 (+20%)</option>
       <option value="3+">3+ (+25%)</option>
@@ -126,12 +126,12 @@
       const height = document.getElementById("story-height").value;
       const hardwater = document.getElementById("hard-water").value;
 
-      let total = (standard * 10) + (large * 16) + (screensClean * 2) + (screensRestore * 3);
+      let total = (standard * 10) + (large * 16) + (screensClean * 2) + (screensRestore * 5);
 
       // Condition adjustment
-      if (condition === "Moderate") total *= 1.04;
-      else if (condition === "Heavy") total *= 1.08;
-      else if (condition === "Construction") total *= 1.15;
+      if (condition === "Moderate") total *= 1.10;
+      else if (condition === "Heavy") total *= 1.20;
+      else if (condition === "Construction") total *= 1.30;
 
       // Frequency discount
       if (frequency === "Biannual") total *= 0.9;
