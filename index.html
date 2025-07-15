@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>The Window Crew Quote Calculator</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700&display=swap" rel="stylesheet" />
   <style>
     body {
       background: #eaf7ff;
@@ -17,63 +17,75 @@
       font-size: 34px;
       font-weight: 700;
       color: #0077cc;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
     }
 
     .toggle-container {
       display: flex;
       justify-content: center;
-      margin-bottom: 25px;
+      margin-bottom: 30px;
     }
 
-    .toggle {
-      position: relative;
+    .toggle-wrapper {
       background: #d8f0ff;
-      border-radius: 50px;
-      display: inline-flex;
-      padding: 4px;
-      height: 48px;
+      border-radius: 40px;
+      display: flex;
+      position: relative;
+      width: 320px;
+      height: 50px;
       align-items: center;
-      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
-    .toggle input[type="radio"] {
+    .toggle-pill {
+      position: absolute;
+      top: 4px;
+      bottom: 4px;
+      width: 50%;
+      border-radius: 40px;
+      background: #00aaff;
+      transition: left 0.3s ease;
+      z-index: 1;
+    }
+
+    .toggle-labels {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      z-index: 2;
+    }
+
+    .toggle-labels label {
+      flex: 1;
+      text-align: center;
+      line-height: 42px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #0077cc;
+      user-select: none;
+    }
+
+    .toggle-radio {
       display: none;
     }
 
-    .toggle label {
-      cursor: pointer;
-      padding: 10px 24px;
-      border-radius: 50px;
-      font-weight: bold;
-      color: #0077cc;
-      z-index: 1;
-      transition: color 0.3s;
-      text-align: center;
-      width: 150px;
+    .toggle-radio:checked + label {
+      color: white;
     }
 
-    .toggle-slider {
-      position: absolute;
-      top: 4px;
+    .toggle-radio#resToggle:checked ~ .toggle-pill {
       left: 4px;
-      width: 150px;
-      height: 40px;
-      background: #00aaff;
-      border-radius: 50px;
-      transition: transform 0.3s ease;
-      z-index: 0;
     }
 
-    #comToggle:checked ~ .toggle-slider {
-      transform: translateX(150px);
+    .toggle-radio#comToggle:checked ~ .toggle-pill {
+      left: 50%;
     }
 
     .form-wrapper {
       background: white;
       padding: 30px;
       border-radius: 25px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
       max-width: 550px;
       margin: auto;
     }
@@ -84,7 +96,8 @@
       margin-top: 15px;
     }
 
-    input, select {
+    input,
+    select {
       width: 100%;
       padding: 12px;
       border-radius: 25px;
@@ -133,8 +146,14 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .form-section {
@@ -147,16 +166,21 @@
   </style>
 </head>
 <body>
-
   <h2>The Window Crew Quote Calculator</h2>
 
   <div class="toggle-container">
-    <div class="toggle">
-      <input type="radio" name="quoteType" id="resToggle" checked onclick="switchForm('residential')">
-      <input type="radio" name="quoteType" id="comToggle" onclick="switchForm('commercial')">
-      <div class="toggle-slider"></div>
-      <label for="resToggle">Residential Quote</label>
-      <label for="comToggle">Commercial Quote</label>
+    <div class="toggle-wrapper">
+      <input type="radio" name="quoteType" id="resToggle" class="toggle-radio" checked />
+      <label for="resToggle" onclick="switchForm('residential')">Residential Quote</label>
+
+      <input type="radio" name="quoteType" id="comToggle" class="toggle-radio" />
+      <label for="comToggle" onclick="switchForm('commercial')">Commercial Quote</label>
+
+      <div class="toggle-pill"></div>
+      <div class="toggle-labels">
+        <label for="resToggle">Residential Quote</label>
+        <label for="comToggle">Commercial Quote</label>
+      </div>
     </div>
   </div>
 
@@ -164,25 +188,25 @@
     <!-- Residential Form -->
     <form id="residentialForm" class="form-section active">
       <label for="customer">Customer / Company Name:</label>
-      <input type="text" id="customer">
+      <input type="text" id="customer" />
 
       <label for="address">Address:</label>
-      <input type="text" id="address">
+      <input type="text" id="address" />
 
       <label for="contact">Contact Info (Phone or Email):</label>
-      <input type="text" id="contact">
+      <input type="text" id="contact" />
 
       <label for="standard-panes">Standard Panes:</label>
-      <input type="number" id="standard-panes">
+      <input type="number" id="standard-panes" />
 
       <label for="large-panes">Large Panes:</label>
-      <input type="number" id="large-panes">
+      <input type="number" id="large-panes" />
 
       <label for="screens-clean">Screens to Clean:</label>
-      <input type="number" id="screens-clean">
+      <input type="number" id="screens-clean" />
 
       <label for="screens-restore">Screens to Restore:</label>
-      <input type="number" id="screens-restore">
+      <input type="number" id="screens-restore" />
 
       <label for="window-condition">Window Condition:</label>
       <select id="window-condition">
@@ -225,9 +249,9 @@
       <div id="quoteOutput"></div>
     </form>
 
-    <!-- Commercial Form (same for now) -->
+    <!-- Commercial Form -->
     <form id="commercialForm" class="form-section">
-      <p style="text-align:center; color:#666;">(Commercial fields coming soon...)</p>
+      <p style="text-align: center; color: #666;">(Commercial fields coming soon...)</p>
     </form>
   </div>
 
@@ -237,10 +261,8 @@
       document.getElementById('commercialForm').classList.remove('active');
 
       if (type === 'residential') {
-        document.getElementById('resToggle').checked = true;
         document.getElementById('residentialForm').classList.add('active');
       } else {
-        document.getElementById('comToggle').checked = true;
         document.getElementById('commercialForm').classList.add('active');
       }
     }
