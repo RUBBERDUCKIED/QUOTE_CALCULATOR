@@ -21,14 +21,20 @@
       box-sizing: border-box;
     }
     button {
-      margin-top: 20px;
+      margin-top: 15px;
       padding: 10px;
       width: 100%;
-      background-color: #00aaff;
-      color: white;
       font-size: 16px;
       border: none;
       cursor: pointer;
+    }
+    #calculateBtn {
+      background-color: #00aaff;
+      color: white;
+    }
+    #submitBtn {
+      background-color: #00cc66;
+      color: white;
     }
     #quoteOutput {
       margin-top: 20px;
@@ -98,10 +104,13 @@
       <option value="Yes">Yes (+10%)</option>
     </select>
 
-    <!-- Final Quote Total -->
+    <!-- Hidden Quote Result -->
     <input type="hidden" name="entry.444104592" id="quote-total" />
 
-    <button type="button" onclick="calculateQuote()">Calculate & Save Quote</button>
+    <!-- Buttons -->
+    <button type="button" id="calculateBtn" onclick="calculateQuote()">Calculate Quote</button>
+    <button type="button" id="submitBtn" onclick="submitForm()">Save Quote</button>
+
     <div id="quoteOutput"></div>
   </form>
 
@@ -141,11 +150,15 @@
       total = total.toFixed(2);
       document.getElementById("quoteOutput").textContent = "Estimated Quote: $" + total;
       document.getElementById("quote-total").value = total;
-
-      submitForm();
     }
 
     function submitForm() {
+      const quote = document.getElementById("quote-total").value;
+      if (!quote) {
+        alert("Please calculate the quote first.");
+        return;
+      }
+
       const form = document.getElementById("quoteForm");
       const formData = new FormData(form);
 
