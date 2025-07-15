@@ -170,7 +170,7 @@
 
   <div class="form-wrapper">
     <!-- Residential -->
-    <form id="quoteForm" class="form-section active">
+    <form id="residential" class="form-section active">
       <label for="customer">Customer / Company Name:</label>
       <input type="text" name="entry.1932766726" id="customer" required>
 
@@ -283,7 +283,7 @@
         return;
       }
 
-      const form = document.getElementById("quoteForm");
+      const form = document.getElementById("residential");
       const formData = new FormData(form);
 
       fetch("https://docs.google.com/forms/d/e/1FAIpQLSfnlHSL3hgL6tLEMw-DXjM_xdvTlSVkMOiq8ZzxWhUgdOnm5Q/formResponse", {
