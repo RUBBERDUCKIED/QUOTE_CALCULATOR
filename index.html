@@ -66,36 +66,36 @@
     <label for="window-condition">Window Condition:</label>
     <select name="entry.1179846798" id="window-condition" required>
       <option value="Good">Good (no change)</option>
-      <option value="Moderate">Moderate Grime/Hard Water Spots (+2%)</option>
-      <option value="Heavy">Heavy Grime/Paint/Stickers (+4%)</option>
-      <option value="Construction">Construction Debris (+6%)</option>
+      <option value="Moderate">Moderate Grime/Hard Water Spots (+4%)</option>
+      <option value="Heavy">Heavy Grime/Paint/Stickers (+8%)</option>
+      <option value="Construction">Construction Debris (+15%)</option>
     </select>
 
     <label for="service-frequency">Service Frequency:</label>
     <select name="entry.312555390" id="service-frequency" required>
       <option value="One-off">One-off (no change)</option>
-      <option value="Twice a Year">Twice a Year (–10%)</option>
+      <option value="Biannual">Twice a Year (–10%)</option>
       <option value="Quarterly">Quarterly (–15%)</option>
     </select>
 
     <label for="sides-cleaned">Sides Cleaned:</label>
     <select name="entry.517640240" id="sides-cleaned" required>
-      <option value="Both">Both</option>
-      <option value="Outside Only">Outside Only</option>
-      <option value="Inside Only">Inside Only</option>
+      <option value="Both">Both (no change)</option>
+      <option value="Outside Only">Outside Only (–30%)</option>
+      <option value="Inside Only">Inside Only (–30%)</option>
     </select>
 
     <label for="story-height">Story Height:</label>
     <select name="entry.1578505655" id="story-height" required>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3+">3+</option>
+      <option value="1">1 (no change)</option>
+      <option value="2">2 (+20%)</option>
+      <option value="3+">3+ (+25%)</option>
     </select>
 
     <label for="hard-water">Hard Water Removal?</label>
     <select name="entry.1843034712" id="hard-water" required>
       <option value="no">No</option>
-      <option value="yes">Yes (+$25)</option>
+      <option value="Yes">Yes (+10%)</option>
     </select>
 
     <!-- Final Quote Total -->
@@ -113,27 +113,35 @@
       const screensRestore = parseInt(document.getElementById("screens-restore").value) || 0;
       const condition = document.getElementById("window-condition").value;
       const frequency = document.getElementById("service-frequency").value;
-      const hardWater = document.getElementById("hard-water").value;
+      const sides = document.getElementById("sides-cleaned").value;
+      const height = document.getElementById("story-height").value;
+      const hardwater = document.getElementById("hard-water").value;
 
-      let total = (standard * 10) + (large * 16) + (screensClean * 3) + (screensRestore * 6);
+      let total = (standard * 10) + (large * 16) + (screensClean * 2) + (screensRestore * 3);
 
-      // Window condition adjustment
-      if (condition === "Moderate") total *= 1.02;
-      else if (condition === "Heavy") total *= 1.04;
-      else if (condition === "Construction") total *= 1.06;
+      // Condition adjustment
+      if (condition === "Moderate") total *= 1.04;
+      else if (condition === "Heavy") total *= 1.08;
+      else if (condition === "Construction") total *= 1.15;
 
       // Frequency discount
-      if (frequency === "Twice a Year") total *= 0.9;
+      if (frequency === "Biannual") total *= 0.9;
       else if (frequency === "Quarterly") total *= 0.85;
 
-      // Hard water
-      if (hardWater === "yes") total += 25;
+      // Sides cleaned discount
+      if (sides === "Inside Only" || sides === "Outside Only") total *= 0.7;
+
+      // Story height adjustment
+      if (height === "2") total *= 1.20;
+      else if (height === "3+") total *= 1.25;
+
+      // Hard water adjustment
+      if (hardwater === "Yes") total *= 1.10;
 
       total = total.toFixed(2);
       document.getElementById("quoteOutput").textContent = "Estimated Quote: $" + total;
       document.getElementById("quote-total").value = total;
 
-      // Submit to Google Form
       submitForm();
     }
 
