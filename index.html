@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>The Window Crew Quote Calculator</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700&display=swap" rel="stylesheet" />
   <style>
     body {
       background: #eaf7ff;
@@ -31,7 +31,7 @@
       background: #d8f0ff;
       border-radius: 50px;
       display: flex;
-      width: 280px;
+      width: 360px;
       height: 50px;
       align-items: center;
       justify-content: space-between;
@@ -43,37 +43,33 @@
       display: none;
     }
 
-    .toggle-label {
+    .toggle-switch label {
       flex: 1;
       text-align: center;
-      z-index: 1;
-      font-weight: bold;
-      color: #0077cc;
       cursor: pointer;
-      transition: color 0.3s ease;
-      line-height: 40px;
+      z-index: 2;
+      font-weight: bold;
+      transition: color 0.3s;
+      color: #0077cc;
     }
 
     .toggle-bg {
       position: absolute;
       height: 40px;
-      width: 50%;
+      width: 170px;
       background: #00aaff;
       border-radius: 50px;
       top: 5px;
       left: 5px;
       transition: left 0.3s ease;
-      z-index: 0;
+      z-index: 1;
     }
 
     #comToggle:checked ~ .toggle-bg {
-      left: 140px;
+      left: 185px;
     }
 
-    #resToggle:checked ~ label[for="resToggle"] {
-      color: white;
-    }
-
+    #resToggle:checked ~ label[for="resToggle"],
     #comToggle:checked ~ label[for="comToggle"] {
       color: white;
     }
@@ -138,7 +134,7 @@
       text-align: center;
       color: #007700;
       font-weight: bold;
-      animation: fadeIn 0.5s ease-in-out;
+      animation: fadeIn 1s ease-in-out;
     }
 
     @keyframes fadeIn {
@@ -161,11 +157,13 @@
 
   <div class="toggle-container">
     <div class="toggle-switch">
-      <input type="radio" name="quoteType" id="resToggle" checked onchange="switchForm('residential')">
-      <input type="radio" name="quoteType" id="comToggle" onchange="switchForm('commercial')">
+      <input type="radio" name="quoteType" id="resToggle" checked onclick="switchForm('residential')">
+      <label for="resToggle">Residential Quote</label>
+
+      <input type="radio" name="quoteType" id="comToggle" onclick="switchForm('commercial')">
+      <label for="comToggle">Commercial Quote</label>
+
       <div class="toggle-bg"></div>
-      <label class="toggle-label" for="resToggle">Residential Quote</label>
-      <label class="toggle-label" for="comToggle">Commercial Quote</label>
     </div>
   </div>
 
@@ -234,7 +232,7 @@
       <div id="quoteOutput"></div>
     </form>
 
-    <!-- Commercial Form (stub for now) -->
+    <!-- Commercial Form -->
     <form id="commercialForm" class="form-section">
       <p style="text-align:center; color:#666;">(Commercial fields coming soon...)</p>
     </form>
@@ -246,10 +244,8 @@
       document.getElementById('commercialForm').classList.remove('active');
 
       if (type === 'residential') {
-        document.getElementById('resToggle').checked = true;
         document.getElementById('residentialForm').classList.add('active');
       } else {
-        document.getElementById('comToggle').checked = true;
         document.getElementById('commercialForm').classList.add('active');
       }
     }
@@ -283,5 +279,6 @@
       document.getElementById("quoteOutput").textContent = "Estimated Quote: $" + total;
     }
   </script>
+
 </body>
 </html>
