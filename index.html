@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Quote Calculator</title>
+  <title>The Window Crew Quote Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
   <style>
@@ -14,7 +14,7 @@
 
     h2 {
       text-align: center;
-      font-size: 32px;
+      font-size: 36px;
       font-weight: 700;
       color: #0077cc;
       margin-bottom: 20px;
@@ -43,44 +43,45 @@
 
     form {
       background: white;
-      padding: 25px 30px;
-      border-radius: 15px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-      max-width: 500px;
+      padding: 30px;
+      border-radius: 25px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      max-width: 520px;
       margin: auto;
     }
 
     label {
       display: block;
-      margin-top: 15px;
-      font-weight: 500;
+      margin-top: 16px;
+      font-weight: 600;
       color: #333;
     }
 
     input, select {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       margin-top: 6px;
       border: 1px solid #ccc;
-      border-radius: 8px;
+      border-radius: 24px;
       box-sizing: border-box;
-      font-size: 15px;
-      transition: border-color 0.3s;
+      font-size: 16px;
+      transition: border-color 0.3s, box-shadow 0.3s;
     }
 
     input:focus, select:focus {
       border-color: #00aaff;
+      box-shadow: 0 0 6px rgba(0,170,255,0.3);
       outline: none;
     }
 
     button {
-      margin-top: 20px;
-      padding: 12px;
+      margin-top: 22px;
+      padding: 14px;
       width: 100%;
       font-size: 16px;
       font-weight: bold;
       border: none;
-      border-radius: 10px;
+      border-radius: 30px;
       cursor: pointer;
       transition: all 0.3s ease;
     }
@@ -104,11 +105,26 @@
     }
 
     #quoteOutput {
-      margin-top: 25px;
-      font-size: 22px;
+      margin-top: 30px;
+      font-size: 26px;
       text-align: center;
       color: #007700;
       font-weight: bold;
+      animation: fadeBounce 0.6s ease-out;
+    }
+
+    @keyframes fadeBounce {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      50% {
+        opacity: 1;
+        transform: translateY(-6px);
+      }
+      100% {
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
@@ -214,7 +230,11 @@
       if (hardwater === "Yes") total *= 1.10;
 
       total = total.toFixed(2);
-      document.getElementById("quoteOutput").textContent = "Estimated Quote: $" + total;
+      const outputDiv = document.getElementById("quoteOutput");
+      outputDiv.textContent = "Estimated Quote: $" + total;
+      outputDiv.style.animation = "none";
+      void outputDiv.offsetWidth; // restart animation
+      outputDiv.style.animation = "fadeBounce 0.6s ease-out";
       document.getElementById("quote-total").value = total;
     }
 
@@ -243,3 +263,4 @@
   </script>
 </body>
 </html>
+
