@@ -26,51 +26,54 @@
       margin-bottom: 25px;
     }
 
-    .toggle-switch {
+    .toggle {
       position: relative;
+      display: flex;
       background: #d8f0ff;
       border-radius: 50px;
-      display: flex;
+      padding: 4px;
       width: 360px;
-      height: 50px;
-      align-items: center;
       justify-content: space-between;
-      padding: 5px;
-      box-sizing: border-box;
+      align-items: center;
     }
 
-    .toggle-switch input[type="radio"] {
+    .toggle input[type="radio"] {
       display: none;
     }
 
-    .toggle-switch label {
+    .toggle label {
       flex: 1;
       text-align: center;
+      padding: 12px 0;
+      font-weight: bold;
+      color: #0077cc;
+      border-radius: 50px;
       cursor: pointer;
       z-index: 2;
-      font-weight: bold;
-      transition: color 0.3s;
-      color: #0077cc;
+      position: relative;
     }
 
-    .toggle-bg {
+    .toggle .slider {
       position: absolute;
-      height: 40px;
-      width: 170px;
-      background: #00aaff;
+      top: 4px;
+      bottom: 4px;
+      width: 50%;
       border-radius: 50px;
-      top: 5px;
-      left: 5px;
+      background-color: #00aaff;
       transition: left 0.3s ease;
       z-index: 1;
     }
 
-    #comToggle:checked ~ .toggle-bg {
-      left: 185px;
+    #residentialToggle:checked ~ .slider {
+      left: 4px;
     }
 
-    #resToggle:checked ~ label[for="resToggle"],
-    #comToggle:checked ~ label[for="comToggle"] {
+    #commercialToggle:checked ~ .slider {
+      left: calc(50% + 2px);
+    }
+
+    #residentialToggle:checked + label,
+    #commercialToggle:checked + label {
       color: white;
     }
 
@@ -156,43 +159,41 @@
   <h2>The Window Crew Quote Calculator</h2>
 
   <div class="toggle-container">
-    <div class="toggle-switch">
-      <input type="radio" name="quoteType" id="resToggle" checked onclick="switchForm('residential')">
-      <label for="resToggle">Residential Quote</label>
-
-      <input type="radio" name="quoteType" id="comToggle" onclick="switchForm('commercial')">
-      <label for="comToggle">Commercial Quote</label>
-
-      <div class="toggle-bg"></div>
+    <div class="toggle">
+      <input type="radio" name="mode" id="residentialToggle" checked onclick="switchMode('residential')" />
+      <label for="residentialToggle">Residential Quote</label>
+      <input type="radio" name="mode" id="commercialToggle" onclick="switchMode('commercial')" />
+      <label for="commercialToggle">Commercial Quote</label>
+      <div class="slider"></div>
     </div>
   </div>
 
   <div class="form-wrapper">
-    <!-- Residential Form -->
-    <form id="residentialForm" class="form-section active">
+    <!-- Residential -->
+    <form id="quoteForm" class="form-section active">
       <label for="customer">Customer / Company Name:</label>
-      <input type="text" id="customer">
+      <input type="text" name="entry.1932766726" id="customer" required>
 
       <label for="address">Address:</label>
-      <input type="text" id="address">
+      <input type="text" name="entry.396915930" id="address" required>
 
       <label for="contact">Contact Info (Phone or Email):</label>
-      <input type="text" id="contact">
+      <input type="text" name="entry.1239873862" id="contact" required>
 
       <label for="standard-panes">Standard Panes:</label>
-      <input type="number" id="standard-panes">
+      <input type="number" name="entry.823020867" id="standard-panes" required>
 
       <label for="large-panes">Large Panes:</label>
-      <input type="number" id="large-panes">
+      <input type="number" name="entry.1634670750" id="large-panes" required>
 
       <label for="screens-clean">Screens to Clean:</label>
-      <input type="number" id="screens-clean">
+      <input type="number" name="entry.1503289555" id="screens-clean" required>
 
       <label for="screens-restore">Screens to Restore:</label>
-      <input type="number" id="screens-restore">
+      <input type="number" name="entry.2096928728" id="screens-restore" required>
 
       <label for="window-condition">Window Condition:</label>
-      <select id="window-condition">
+      <select name="entry.1179846798" id="window-condition" required>
         <option value="Good">Good (no change)</option>
         <option value="Moderate">Moderately Dirty (+10%)</option>
         <option value="Heavy">Heavily Soiled (+20%)</option>
@@ -200,54 +201,52 @@
       </select>
 
       <label for="service-frequency">Service Frequency:</label>
-      <select id="service-frequency">
+      <select name="entry.312555390" id="service-frequency" required>
         <option value="One-off">One-off (no change)</option>
         <option value="Biannual">Twice a Year (–10%)</option>
         <option value="Quarterly">Quarterly (–15%)</option>
       </select>
 
       <label for="sides-cleaned">Sides Cleaned:</label>
-      <select id="sides-cleaned">
+      <select name="entry.517640240" id="sides-cleaned" required>
         <option value="Both">Both</option>
         <option value="Outside Only">Outside Only (–30%)</option>
         <option value="Inside Only">Inside Only (–30%)</option>
       </select>
 
       <label for="story-height">Story Height:</label>
-      <select id="story-height">
-        <option value="1">1 (no change)</option>
+      <select name="entry.1578550565" id="story-height" required>
+        <option value="1">1</option>
         <option value="2">2 (+12%)</option>
         <option value="3+">3+ (+25%)</option>
       </select>
 
       <label for="hard-water">Hard Water Removal?</label>
-      <select id="hard-water">
+      <select name="entry.1843034712" id="hard-water" required>
         <option value="no">No</option>
         <option value="Yes">Yes (+10%)</option>
       </select>
 
+      <input type="hidden" name="entry.444104592" id="quote-total" />
+
       <button type="button" id="calculateBtn" onclick="calculateQuote()">Calculate Quote</button>
-      <button type="button" id="submitBtn" onclick="alert('Quote submitted!')">Save Quote</button>
+      <button type="button" id="submitBtn" onclick="submitForm()">Save Quote</button>
 
       <div id="quoteOutput"></div>
     </form>
 
-    <!-- Commercial Form -->
-    <form id="commercialForm" class="form-section">
-      <p style="text-align:center; color:#666;">(Commercial fields coming soon...)</p>
-    </form>
+    <!-- Commercial -->
+    <div id="commercial" class="form-section">
+      <p style="text-align:center; font-weight:bold; color:#555;">Commercial quote form will go here.</p>
+    </div>
   </div>
 
   <script>
-    function switchForm(type) {
-      document.getElementById('residentialForm').classList.remove('active');
-      document.getElementById('commercialForm').classList.remove('active');
-
-      if (type === 'residential') {
-        document.getElementById('residentialForm').classList.add('active');
-      } else {
-        document.getElementById('commercialForm').classList.add('active');
-      }
+    function switchMode(mode) {
+      document.querySelectorAll(".form-section").forEach(section => {
+        section.classList.remove("active");
+      });
+      document.getElementById(mode).classList.add("active");
     }
 
     function calculateQuote() {
@@ -262,14 +261,11 @@
       const hardwater = document.getElementById("hard-water").value;
 
       let total = (standard * 10) + (large * 16) + (screensClean * 2) + (screensRestore * 5);
-
       if (condition === "Moderate") total *= 1.10;
       else if (condition === "Heavy") total *= 1.20;
       else if (condition === "Construction") total *= 1.30;
-
       if (frequency === "Biannual") total *= 0.9;
       else if (frequency === "Quarterly") total *= 0.85;
-
       if (sides === "Inside Only" || sides === "Outside Only") total *= 0.7;
       if (height === "2") total *= 1.12;
       else if (height === "3+") total *= 1.25;
@@ -277,6 +273,30 @@
 
       total = total.toFixed(2);
       document.getElementById("quoteOutput").textContent = "Estimated Quote: $" + total;
+      document.getElementById("quote-total").value = total;
+    }
+
+    function submitForm() {
+      const quote = document.getElementById("quote-total").value;
+      if (!quote) {
+        alert("Please calculate the quote first.");
+        return;
+      }
+
+      const form = document.getElementById("quoteForm");
+      const formData = new FormData(form);
+
+      fetch("https://docs.google.com/forms/d/e/1FAIpQLSfnlHSL3hgL6tLEMw-DXjM_xdvTlSVkMOiq8ZzxWhUgdOnm5Q/formResponse", {
+        method: "POST",
+        mode: "no-cors",
+        body: formData
+      }).then(() => {
+        alert("Quote submitted successfully!");
+        form.reset();
+        document.getElementById("quoteOutput").textContent = "";
+      }).catch(() => {
+        alert("Failed to submit. Please try again.");
+      });
     }
   </script>
 
