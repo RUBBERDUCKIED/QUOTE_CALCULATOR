@@ -27,10 +27,14 @@
     }
 
     .toggle {
+      position: relative;
       background: #d8f0ff;
       border-radius: 50px;
       display: inline-flex;
       padding: 4px;
+      height: 48px;
+      align-items: center;
+      overflow: hidden;
     }
 
     .toggle input[type="radio"] {
@@ -39,16 +43,30 @@
 
     .toggle label {
       cursor: pointer;
-      padding: 10px 20px;
+      padding: 10px 24px;
       border-radius: 50px;
       font-weight: bold;
       color: #0077cc;
-      transition: background 0.3s, color 0.3s;
+      z-index: 1;
+      transition: color 0.3s;
+      text-align: center;
+      width: 150px;
     }
 
-    .toggle input[type="radio"]:checked + label {
+    .toggle-slider {
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 150px;
+      height: 40px;
       background: #00aaff;
-      color: white;
+      border-radius: 50px;
+      transition: transform 0.3s ease;
+      z-index: 0;
+    }
+
+    #comToggle:checked ~ .toggle-slider {
+      transform: translateX(150px);
     }
 
     .form-wrapper {
@@ -134,10 +152,11 @@
 
   <div class="toggle-container">
     <div class="toggle">
-      <input type="radio" name="quoteType" id="resToggle" checked>
-      <label for="resToggle" onclick="switchForm('residential')">Residential Quote</label>
-      <input type="radio" name="quoteType" id="comToggle">
-      <label for="comToggle" onclick="switchForm('commercial')">Commercial Quote</label>
+      <input type="radio" name="quoteType" id="resToggle" checked onclick="switchForm('residential')">
+      <input type="radio" name="quoteType" id="comToggle" onclick="switchForm('commercial')">
+      <div class="toggle-slider"></div>
+      <label for="resToggle">Residential Quote</label>
+      <label for="comToggle">Commercial Quote</label>
     </div>
   </div>
 
@@ -208,7 +227,6 @@
 
     <!-- Commercial Form (same for now) -->
     <form id="commercialForm" class="form-section">
-      <!-- same inputs as above for now -->
       <p style="text-align:center; color:#666;">(Commercial fields coming soon...)</p>
     </form>
   </div>
@@ -219,8 +237,10 @@
       document.getElementById('commercialForm').classList.remove('active');
 
       if (type === 'residential') {
+        document.getElementById('resToggle').checked = true;
         document.getElementById('residentialForm').classList.add('active');
       } else {
+        document.getElementById('comToggle').checked = true;
         document.getElementById('commercialForm').classList.add('active');
       }
     }
@@ -256,4 +276,3 @@
   </script>
 </body>
 </html>
-
