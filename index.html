@@ -1,48 +1,95 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Window Crew Quote Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
+      font-family: 'Quicksand', sans-serif;
+      background: #f0f9ff;
+      padding: 30px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #0077cc;
+      margin-bottom: 20px;
+    }
+
+    form {
+      background: white;
+      padding: 25px 30px;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
       max-width: 500px;
       margin: auto;
     }
+
     label {
       display: block;
-      margin-top: 12px;
+      margin-top: 15px;
+      font-weight: 500;
+      color: #333;
     }
+
     input, select {
       width: 100%;
-      padding: 8px;
-      margin-top: 4px;
-      box-sizing: border-box;
-    }
-    button {
-      margin-top: 15px;
       padding: 10px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+      font-size: 15px;
+      transition: border-color 0.3s;
+    }
+
+    input:focus, select:focus {
+      border-color: #00aaff;
+      outline: none;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px;
       width: 100%;
       font-size: 16px;
+      font-weight: bold;
       border: none;
+      border-radius: 10px;
       cursor: pointer;
+      transition: all 0.3s ease;
     }
+
     #calculateBtn {
       background-color: #00aaff;
       color: white;
     }
+
+    #calculateBtn:hover {
+      background-color: #0094d9;
+    }
+
     #submitBtn {
       background-color: #00cc66;
       color: white;
     }
+
+    #submitBtn:hover {
+      background-color: #00b35a;
+    }
+
     #quoteOutput {
-      margin-top: 20px;
-      font-weight: bold;
+      margin-top: 25px;
+      font-size: 18px;
+      text-align: center;
+      color: #007700;
     }
   </style>
 </head>
 <body>
+
   <h2>Window Crew Quote Calculator</h2>
 
   <form id="quoteForm">
@@ -128,23 +175,18 @@
 
       let total = (standard * 10) + (large * 16) + (screensClean * 2) + (screensRestore * 5);
 
-      // Condition adjustment
       if (condition === "Moderate") total *= 1.10;
       else if (condition === "Heavy") total *= 1.20;
       else if (condition === "Construction") total *= 1.30;
 
-      // Frequency discount
       if (frequency === "Biannual") total *= 0.9;
       else if (frequency === "Quarterly") total *= 0.85;
 
-      // Sides cleaned discount
       if (sides === "Inside Only" || sides === "Outside Only") total *= 0.7;
 
-      // Story height adjustment
       if (height === "2") total *= 1.12;
       else if (height === "3+") total *= 1.25;
 
-      // Hard water adjustment
       if (hardwater === "Yes") total *= 1.10;
 
       total = total.toFixed(2);
@@ -177,3 +219,4 @@
   </script>
 </body>
 </html>
+
