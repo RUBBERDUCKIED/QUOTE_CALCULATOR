@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>The Window Crew Quote Calculator</title>
+  <title>Window Crew Quote Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Quicksand', sans-serif;
@@ -14,8 +14,31 @@
 
     h2 {
       text-align: center;
+      font-size: 32px;
+      font-weight: 700;
       color: #0077cc;
       margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    h2::after {
+      content: "";
+      position: absolute;
+      width: 120%;
+      height: 100%;
+      background: linear-gradient(120deg, #b3ecff 0%, #ffffff 60%);
+      top: 0;
+      left: -120%;
+      animation: squeegee 3s ease-in-out forwards;
+      opacity: 0.5;
+      z-index: -1;
+    }
+
+    @keyframes squeegee {
+      to {
+        left: 100%;
+      }
     }
 
     form {
@@ -82,9 +105,10 @@
 
     #quoteOutput {
       margin-top: 25px;
-      font-size: 18px;
+      font-size: 22px;
       text-align: center;
       color: #007700;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -219,4 +243,3 @@
   </script>
 </body>
 </html>
-
