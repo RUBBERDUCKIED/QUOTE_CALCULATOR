@@ -17,7 +17,7 @@
       font-size: 36px;
       font-weight: 700;
       color: #0077cc;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
       position: relative;
       overflow: hidden;
     }
@@ -43,16 +43,16 @@
 
     form {
       background: white;
-      padding: 30px;
-      border-radius: 25px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-      max-width: 520px;
+      padding: 25px 30px;
+      border-radius: 30px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      max-width: 500px;
       margin: auto;
     }
 
     label {
       display: block;
-      margin-top: 16px;
+      margin-top: 15px;
       font-weight: 600;
       color: #333;
     }
@@ -62,20 +62,19 @@
       padding: 12px;
       margin-top: 6px;
       border: 1px solid #ccc;
-      border-radius: 24px;
+      border-radius: 30px;
       box-sizing: border-box;
-      font-size: 16px;
-      transition: border-color 0.3s, box-shadow 0.3s;
+      font-size: 15px;
+      transition: border-color 0.3s ease;
     }
 
     input:focus, select:focus {
       border-color: #00aaff;
-      box-shadow: 0 0 6px rgba(0,170,255,0.3);
       outline: none;
     }
 
     button {
-      margin-top: 22px;
+      margin-top: 20px;
       padding: 14px;
       width: 100%;
       font-size: 16px;
@@ -105,26 +104,41 @@
     }
 
     #quoteOutput {
-      margin-top: 30px;
-      font-size: 26px;
+      margin-top: 25px;
+      font-size: 24px;
       text-align: center;
       color: #007700;
       font-weight: bold;
-      animation: fadeBounce 0.6s ease-out;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
-    @keyframes fadeBounce {
-      0% {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      50% {
-        opacity: 1;
-        transform: translateY(-6px);
-      }
-      100% {
-        transform: translateY(0);
-      }
+    #quoteOutput.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #00cc66;
+      color: white;
+      padding: 14px 24px;
+      border-radius: 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      font-weight: bold;
+      font-size: 16px;
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.5s ease, bottom 0.5s ease;
+    }
+
+    #toast.show {
+      opacity: 1;
+      bottom: 50px;
     }
   </style>
 </head>
@@ -201,6 +215,9 @@
     <div id="quoteOutput"></div>
   </form>
 
+  <!-- Custom Toast Message -->
+  <div id="toast">Quote submitted successfully!</div>
+
   <script>
     function calculateQuote() {
       const standard = parseInt(document.getElementById("standard-panes").value) || 0;
@@ -230,11 +247,9 @@
       if (hardwater === "Yes") total *= 1.10;
 
       total = total.toFixed(2);
-      const outputDiv = document.getElementById("quoteOutput");
-      outputDiv.textContent = "Estimated Quote: $" + total;
-      outputDiv.style.animation = "none";
-      void outputDiv.offsetWidth; // restart animation
-      outputDiv.style.animation = "fadeBounce 0.6s ease-out";
+      const output = document.getElementById("quoteOutput");
+      output.textContent = "Estimated Quote: $" + total;
+      output.classList.add("show");
       document.getElementById("quote-total").value = total;
     }
 
@@ -253,7 +268,11 @@
         mode: "no-cors",
         body: formData
       }).then(() => {
-        alert("Quote submitted successfully!");
+        const toast = document.getElementById("toast");
+        toast.classList.add("show");
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 3000);
         form.reset();
         document.getElementById("quoteOutput").textContent = "";
       }).catch(() => {
