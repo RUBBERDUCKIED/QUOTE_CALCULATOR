@@ -12,6 +12,13 @@
       padding: 30px;
     }
 
+    .logo {
+      display: block;
+      margin: 0 auto 10px;
+      max-width: 160px;
+      height: auto;
+    }
+
     h2 {
       text-align: center;
       font-size: 34px;
@@ -42,21 +49,19 @@
     }
 
     .toggle label {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  font-weight: bold;
-  color: #0077cc;
-  border-radius: 50px;
-  cursor: pointer;
-  z-index: 2;
-  position: relative;
-  padding: 0;
-  margin: 0;
-  line-height: normal;
-}
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      text-align: center;
+      font-weight: bold;
+      color: #0077cc;
+      border-radius: 50px;
+      cursor: pointer;
+      z-index: 2;
+      position: relative;
+    }
 
     .toggle .slider {
       position: absolute;
@@ -162,8 +167,13 @@
 </head>
 <body>
 
-  <h2>The Window Crew Quote Calculator</h2>
+  <!-- Logo -->
+  <img src="logo.png" alt="The Window Crew Logo" class="logo" />
 
+  <!-- Title -->
+  <h2>Quote Calculator</h2>
+
+  <!-- Toggle Switch -->
   <div class="toggle-container">
     <div class="toggle">
       <input type="radio" name="mode" id="residentialToggle" checked onclick="switchMode('residential')" />
@@ -175,7 +185,7 @@
   </div>
 
   <div class="form-wrapper">
-    <!-- Residential -->
+    <!-- Residential Form -->
     <form id="residential" class="form-section active">
       <label for="customer">Customer / Company Name:</label>
       <input type="text" name="entry.1932766726" id="customer" required>
@@ -241,7 +251,7 @@
       <div id="quoteOutput"></div>
     </form>
 
-    <!-- Commercial -->
+    <!-- Commercial Placeholder -->
     <div id="commercial" class="form-section">
       <p style="text-align:center; font-weight:bold; color:#555;">Commercial quote form will go here.</p>
     </div>
