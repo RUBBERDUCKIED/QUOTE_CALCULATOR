@@ -12,19 +12,18 @@
       padding: 30px;
     }
 
-    .logo {
-      display: block;
-      margin: 0 auto 10px;
-      max-width: 160px;
-      height: auto;
-    }
-
     h2 {
       text-align: center;
       font-size: 34px;
       font-weight: 700;
       color: #0077cc;
       margin-bottom: 20px;
+    }
+
+    .logo {
+      display: block;
+      max-width: 180px;
+      margin: 0 auto 15px auto;
     }
 
     .toggle-container {
@@ -61,6 +60,7 @@
       cursor: pointer;
       z-index: 2;
       position: relative;
+      height: 100%;
     }
 
     .toggle .slider {
@@ -167,13 +167,13 @@
 </head>
 <body>
 
-  <!-- Logo -->
-  <img src="logo.png" alt="The Window Crew Logo" class="logo" />
+  <!-- Logo Image -->
+  <img src="logo.png" alt="The Window Crew logo" class="logo" />
 
-  <!-- Title -->
+  <!-- Page Title -->
   <h2>Quote Calculator</h2>
 
-  <!-- Toggle Switch -->
+  <!-- Toggle -->
   <div class="toggle-container">
     <div class="toggle">
       <input type="radio" name="mode" id="residentialToggle" checked onclick="switchMode('residential')" />
@@ -184,6 +184,7 @@
     </div>
   </div>
 
+  <!-- Form -->
   <div class="form-wrapper">
     <!-- Residential Form -->
     <form id="residential" class="form-section active">
@@ -251,7 +252,7 @@
       <div id="quoteOutput"></div>
     </form>
 
-    <!-- Commercial Placeholder -->
+    <!-- Commercial Form Placeholder -->
     <div id="commercial" class="form-section">
       <p style="text-align:center; font-weight:bold; color:#555;">Commercial quote form will go here.</p>
     </div>
