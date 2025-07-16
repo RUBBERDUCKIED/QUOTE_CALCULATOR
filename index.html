@@ -142,7 +142,7 @@
       background-color: #00b35a;
     }
 
-    #quoteOutput {
+    .quoteOutput {
       margin-top: 25px;
       font-size: 22px;
       text-align: center;
@@ -248,12 +248,14 @@
       <button type="button" id="calculateBtn" onclick="calculateQuote('residential')">Calculate Quote</button>
       <button type="button" id="submitBtn" onclick="submitForm()">Save Quote</button>
 
-      <div id="quoteOutput"></div>
+      <div id="quoteOutput" class="quoteOutput"></div>
     </form>
 
     <!-- Commercial Form -->
     <form id="commercial" class="form-section">
       <input type="hidden" name="entry.2076942710" value="Commercial" />
+
+      <!-- same commercial fields as before -->
       <label for="customer-c">Customer / Company Name:</label>
       <input type="text" name="entry.1932766726" id="customer-c" required>
 
@@ -315,7 +317,7 @@
       <button type="button" id="calculateBtn" onclick="calculateQuote('commercial')">Calculate Quote</button>
       <button type="button" id="submitBtn" onclick="submitForm()">Save Quote</button>
 
-      <div id="quoteOutput"></div>
+      <div id="quoteOutput-c" class="quoteOutput"></div>
     </form>
   </div>
 
@@ -354,7 +356,9 @@
 
       total = total.toFixed(2);
       get("quote-total").value = total;
-      document.getElementById("quoteOutput").textContent = "Estimated Quote: $" + total;
+
+      const outputId = mode === 'commercial' ? "quoteOutput-c" : "quoteOutput";
+      document.getElementById(outputId).textContent = "Estimated Quote: $" + total;
     }
 
     function submitForm() {
@@ -375,6 +379,7 @@
         alert("Quote submitted successfully!");
         activeForm.reset();
         document.getElementById("quoteOutput").textContent = "";
+        document.getElementById("quoteOutput-c").textContent = "";
       }).catch(() => {
         alert("Failed to submit. Please try again.");
       });
@@ -383,4 +388,3 @@
 
 </body>
 </html>
-<!-- Force redeploy -->
