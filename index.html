@@ -203,7 +203,7 @@
       <input type="number" name="entry.1634670750" id="large-panes" required>
       <label># of Screens to Clean:</label>
       <input type="number" name="entry.1503289555" id="screens-clean" required>
-      <label>Screens to Restore:</label>
+      <label># of Screens to Restore:</label>
       <input type="number" name="entry.2096928728" id="screens-restore" required>
       <label>Window Condition:</label>
       <select name="entry.1179846798" id="window-condition" required>
@@ -254,9 +254,9 @@
       <input type="number" name="entry.823020867" id="standard-panes-c" required>
       <label># of Large Window Panes:</label>
       <input type="number" name="entry.1634670750" id="large-panes-c" required>
-      <label>Screens to Clean:</label>
+      <label># of Screens to Clean:</label>
       <input type="number" name="entry.1503289555" id="screens-clean-c" required>
-      <label>Screens to Restore:</label>
+      <label># of Screens to Restore:</label>
       <input type="number" name="entry.2096928728" id="screens-restore-c" required>
       <label>Window Condition:</label>
       <select name="entry.1179846798" id="window-condition-c" required>
@@ -319,7 +319,7 @@
       let total = (standard * 7.5) + (large * 14) + (screensClean * 2) + (screensRestore * 10);
       if (condition === "Moderate") total *= 1.10;
       else if (condition === "Heavy") total *= 1.20;
-      else if (condition === "Construction") total *= 1.30;
+      else if (condition === "Construction") total *= 1.60;
       if (frequency === "Biannual") total *= 0.9;
       else if (frequency === "Quarterly") total *= 0.85;
       if (sides === "Inside Only" || sides === "Outside Only") total *= 0.7;
