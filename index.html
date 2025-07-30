@@ -191,49 +191,49 @@
     <!-- Residential Form -->
     <form id="residential" class="form-section active">
       <input type="hidden" name="entry.2076942710" value="Residential" />
-      <label>Customer / Company Name:</label>
+      <label>Customer Name:</label>
       <input type="text" name="entry.1932766726" id="customer" required>
       <label>Address:</label>
       <input type="text" name="entry.396915930" id="address" required>
-      <label>Contact Info (Phone or Email):</label>
+      <label>Contact Info (Phone, Email, or Both):</label>
       <input type="text" name="entry.1239873862" id="contact" required>
-      <label>Standard Panes:</label>
+      <label># of Standard Window Panes:</label>
       <input type="number" name="entry.823020867" id="standard-panes" required>
-      <label>Large Panes:</label>
+      <label># of Large Window Panes:</label>
       <input type="number" name="entry.1634670750" id="large-panes" required>
-      <label>Screens to Clean:</label>
+      <label># of Screens to Clean:</label>
       <input type="number" name="entry.1503289555" id="screens-clean" required>
       <label>Screens to Restore:</label>
       <input type="number" name="entry.2096928728" id="screens-restore" required>
       <label>Window Condition:</label>
       <select name="entry.1179846798" id="window-condition" required>
-        <option value="Good">Good (no change)</option>
-        <option value="Moderate">Moderately Dirty (+10%)</option>
-        <option value="Heavy">Heavily Soiled (+20%)</option>
-        <option value="Construction">Construction Debris (+30%)</option>
+        <option value="Good">Good Condition</option>
+        <option value="Moderate">Moderately Soiled</option>
+        <option value="Heavy">Heavily Soiled</option>
+        <option value="Construction">Construction Debris</option>
       </select>
       <label>Service Frequency:</label>
       <select name="entry.312555390" id="service-frequency" required>
-        <option value="One-off">One-off (no change)</option>
-        <option value="Biannual">Twice a Year (–10%)</option>
-        <option value="Quarterly">Quarterly (–15%)</option>
+        <option value="One-off">One-off</option>
+        <option value="Biannual">Twice a Year</option>
+        <option value="Quarterly">Quarterly</option>
       </select>
       <label>Sides Cleaned:</label>
       <select name="entry.517640240" id="sides-cleaned" required>
         <option value="Both">Both</option>
-        <option value="Outside Only">Outside Only (–30%)</option>
-        <option value="Inside Only">Inside Only (–30%)</option>
+        <option value="Outside Only">Outside Only</option>
+        <option value="Inside Only">Inside Only</option>
       </select>
       <label>Story Height:</label>
       <select name="entry.1578550565" id="story-height" required>
-        <option value="1">1</option>
-        <option value="2">2 (+12%)</option>
-        <option value="3+">3+ (+25%)</option>
+        <option value="1">1 Story</option>
+        <option value="2">2 Stories</option>
+        <option value="3+">3+ Stories</option>
       </select>
       <label>Hard Water Removal?</label>
       <select name="entry.1843034712" id="hard-water" required>
         <option value="no">No</option>
-        <option value="Yes">Yes (+10%)</option>
+        <option value="Yes">Yes</option>
       </select>
       <input type="hidden" name="entry.444104592" id="quote-total" />
       <button type="button" id="calculateBtn" onclick="calculateQuote('residential')">Calculate Quote</button>
@@ -244,15 +244,15 @@
     <!-- Commercial Form -->
     <form id="commercial" class="form-section">
       <input type="hidden" name="entry.2076942710" value="Commercial" />
-      <label>Customer / Company Name:</label>
+      <label>Company Name:</label>
       <input type="text" name="entry.1932766726" id="customer-c" required>
-      <label>Address:</label>
+      <label>Your Address:</label>
       <input type="text" name="entry.396915930" id="address-c" required>
-      <label>Contact Info (Phone or Email):</label>
+      <label>Contact Info (Phone, Email, or Both):</label>
       <input type="text" name="entry.1239873862" id="contact-c" required>
-      <label>Standard Panes:</label>
+      <label># of Standard Window Panes:</label>
       <input type="number" name="entry.823020867" id="standard-panes-c" required>
-      <label>Large Panes:</label>
+      <label># of Large Window Panes:</label>
       <input type="number" name="entry.1634670750" id="large-panes-c" required>
       <label>Screens to Clean:</label>
       <input type="number" name="entry.1503289555" id="screens-clean-c" required>
@@ -260,28 +260,28 @@
       <input type="number" name="entry.2096928728" id="screens-restore-c" required>
       <label>Window Condition:</label>
       <select name="entry.1179846798" id="window-condition-c" required>
-        <option value="Good">Good (no change)</option>
-        <option value="Moderate">Moderately Dirty (+10%)</option>
-        <option value="Heavy">Heavily Soiled (+20%)</option>
-        <option value="Construction">Construction Debris (+30%)</option>
+        <option value="Good">Good Condition</option>
+        <option value="Moderate">Moderately Soiled</option>
+        <option value="Heavy">Heavily Soiled</option>
+        <option value="Construction">Construction Debris</option>
       </select>
       <label>Service Frequency:</label>
       <select name="entry.312555390" id="service-frequency-c" required>
-        <option value="One-off">One-off (no change)</option>
-        <option value="Biannual">Twice a Year (–10%)</option>
-        <option value="Quarterly">Quarterly (–15%)</option>
+        <option value="One-off">One-off/First Time Clean</option>
+        <option value="Biannual">Twice a Year</option>
+        <option value="Quarterly">Quarterly</option>
       </select>
       <label>Sides Cleaned:</label>
       <select name="entry.517640240" id="sides-cleaned-c" required>
         <option value="Both">Both</option>
-        <option value="Outside Only">Outside Only (–30%)</option>
-        <option value="Inside Only">Inside Only (–30%)</option>
+        <option value="Outside Only">Outside Only</option>
+        <option value="Inside Only">Inside Only</option>
       </select>
       <label>Story Height:</label>
       <select name="entry.1578550565" id="story-height-c" required>
-        <option value="1">1</option>
-        <option value="2">2 (+12%)</option>
-        <option value="3+">3+ (+25%)</option>
+        <option value="1">1 Story</option>
+        <option value="2">2 Stories</option>
+        <option value="3+">3+ Stories</option>
       </select>
       <label>Hard Water Removal?</label>
       <select name="entry.1843034712" id="hard-water-c" required>
@@ -316,7 +316,7 @@
       const height = get("story-height").value;
       const hardwater = get("hard-water").value;
 
-      let total = (standard * 7.5) + (large * 14) + (screensClean * 2) + (screensRestore * 5);
+      let total = (standard * 7.5) + (large * 14) + (screensClean * 2) + (screensRestore * 10);
       if (condition === "Moderate") total *= 1.10;
       else if (condition === "Heavy") total *= 1.20;
       else if (condition === "Construction") total *= 1.30;
@@ -325,8 +325,8 @@
       if (sides === "Inside Only" || sides === "Outside Only") total *= 0.7;
       if (height === "2") total *= 1.12;
       else if (height === "3+") total *= 1.25;
-      if (hardwater === "Yes") total *= 1.10;
-      if (mode === 'commercial') total *= 0.4;
+      if (hardwater === "Yes") total *= 1.20;
+      if (mode === 'commercial') total *= 0.35;
 
       total = total.toFixed(2);
       get("quote-total").value = total;
