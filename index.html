@@ -365,13 +365,13 @@
       document.getElementById(outputId).textContent = "Estimated Quote: $" + total;
     }
 
-    // ⬇️ ONLY THIS FUNCTION CHANGED: posts JSON to your Apps Script Web App URL
+    /* ONLY THIS FUNCTION CHANGED: it now posts JSON to your Apps Script Web App */
     function submitForm() {
       const activeForm = document.querySelector(".form-section.active");
       const mode = activeForm.id; // 'residential' | 'commercial' | 'storefront'
 
-      // Ensure they clicked Calculate first
-      const quoteInput = activeForm.querySelector('input[id^="quote-total"]');
+      // ensure Calculate was clicked
+      const quoteInput = activeForm.querySelector('input[name="entry.444104592"]');
       const quote = quoteInput ? quoteInput.value : '';
       if (!quote) {
         alert("Please calculate the quote first.");
@@ -393,20 +393,22 @@
         hardwater:      get("hard-water").value,
         total:          parseFloat(get("quote-total").value || 0),
         address:        get("address").value,
-        company:        get("customer").value,   // Your sheet treats this as customer/company
+        company:        get("customer").value,
         contact:        get("contact").value
       };
 
+      // IMPORTANT: no headers, use no-cors to avoid preflight from GitHub Pages
       fetch("https://script.google.com/macros/s/AKfycbxilR3AlQa9BSSCy5bqNa6CYS2i8A9Av6lYHuIRnqx_CLwYEmTPJpp3ps5Aq5v9kQxV/exec", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        mode: "no-cors",
         body: JSON.stringify(payload)
       })
       .then(() => {
         alert("Quote submitted successfully!");
         activeForm.reset();
-        const outs = ["quoteOutput", "quoteOutput-c", "quoteOutput-s"];
-        outs.forEach(id => { const el = document.getElementById(id); if (el) el.textContent = ""; });
+        document.getElementById("quoteOutput").textContent = "";
+        const c = document.getElementById("quoteOutput-c"); if (c) c.textContent = "";
+        const s = document.getElementById("quoteOutput-s"); if (s) s.textContent = "";
       })
       .catch(() => {
         alert("Failed to submit. Please try again.");
