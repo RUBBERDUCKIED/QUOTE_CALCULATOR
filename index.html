@@ -365,27 +365,50 @@
       document.getElementById(outputId).textContent = "Estimated Quote: $" + total;
     }
 
+    // ⬇️ ONLY THIS FUNCTION CHANGED: posts JSON to your Apps Script Web App URL
     function submitForm() {
       const activeForm = document.querySelector(".form-section.active");
-      const quoteInput = activeForm.querySelector('input[name="entry.444104592"]');
-      const quote = quoteInput.value;
+      const mode = activeForm.id; // 'residential' | 'commercial' | 'storefront'
+
+      // Ensure they clicked Calculate first
+      const quoteInput = activeForm.querySelector('input[id^="quote-total"]');
+      const quote = quoteInput ? quoteInput.value : '';
       if (!quote) {
         alert("Please calculate the quote first.");
         return;
       }
 
-      const formData = new FormData(activeForm);
-      fetch("https://docs.google.com/forms/d/e/1FAIpQLSfnlHSL3hgL6tLEMw-DXjM_xdvTlSVkMOiq8ZzxWhUgdOnm5Q/formResponse", {
+      const suffix = mode === 'commercial' ? '-c' : (mode === 'storefront' ? '-s' : '');
+      const get = id => document.getElementById(id + suffix);
+
+      const payload = {
+        standard:       parseInt(get("standard-panes").value) || 0,
+        large:          parseInt(get("large-panes").value) || 0,
+        screensClean:   parseInt(get("screens-clean").value) || 0,
+        screensRestore: parseInt(get("screens-restore").value) || 0,
+        condition:      get("window-condition").value,
+        frequency:      get("service-frequency").value,
+        sides:          get("sides-cleaned").value,
+        height:         get("story-height").value,
+        hardwater:      get("hard-water").value,
+        total:          parseFloat(get("quote-total").value || 0),
+        address:        get("address").value,
+        company:        get("customer").value,   // Your sheet treats this as customer/company
+        contact:        get("contact").value
+      };
+
+      fetch("https://script.google.com/macros/s/AKfycbxilR3AlQa9BSSCy5bqNa6CYS2i8A9Av6lYHuIRnqx_CLwYEmTPJpp3ps5Aq5v9kQxV/exec", {
         method: "POST",
-        mode: "no-cors",
-        body: formData
-      }).then(() => {
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      })
+      .then(() => {
         alert("Quote submitted successfully!");
         activeForm.reset();
-        document.getElementById("quoteOutput").textContent = "";
-        document.getElementById("quoteOutput-c").textContent = "";
-        document.getElementById("quoteOutput-s").textContent = "";
-      }).catch(() => {
+        const outs = ["quoteOutput", "quoteOutput-c", "quoteOutput-s"];
+        outs.forEach(id => { const el = document.getElementById(id); if (el) el.textContent = ""; });
+      })
+      .catch(() => {
         alert("Failed to submit. Please try again.");
       });
     }
