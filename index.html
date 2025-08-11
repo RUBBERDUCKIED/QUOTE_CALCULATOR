@@ -22,17 +22,9 @@
       margin-bottom: 20px;
     }
 
-    .logo {
-      display: block;
-      max-width: 180px;
-      margin: 0 auto 15px auto;
-    }
+    .logo { display: block; max-width: 180px; margin: 0 auto 15px auto; }
 
-    .toggle-container {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 25px;
-    }
+    .toggle-container { display: flex; justify-content: center; margin-bottom: 25px; }
 
     /* 3-way pill toggle */
     .toggle {
@@ -41,98 +33,50 @@
       grid-template-columns: 1fr 1fr 1fr;
       background: #d8f0ff;
       border-radius: 50px;
-      width: 540px;          /* wider to fit 3 labels comfortably */
+      width: 540px;
       height: 46px;
       align-items: center;
     }
-
     .toggle input[type="radio"] { display: none; }
-
     .toggle label {
-      display: grid;         /* ensures perfect vertical centering */
-      place-items: center;   /* centers text vertically & horizontally */
-      text-align: center;
-      font-weight: bold;
-      color: #0077cc;
-      border-radius: 50px;
-      cursor: pointer;
-      z-index: 2;
-      height: 100%;
-      user-select: none;
-      line-height: 1;        /* avoid baseline sag */
+      display: grid; place-items: center; text-align: center; font-weight: bold;
+      color: #0077cc; border-radius: 50px; cursor: pointer; z-index: 2; height: 100%;
+      user-select: none; line-height: 1;
     }
-
     .toggle .slider {
-      position: absolute;
-      top: 4px;
-      bottom: 4px;
-      left: 4px;
-      width: calc(33.333% - 8px);
-      border-radius: 50px;
-      background-color: #00aaff;
-      transition: left 0.3s ease;
-      z-index: 1;
+      position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc(33.333% - 8px);
+      border-radius: 50px; background-color: #00aaff; transition: left 0.3s ease; z-index: 1;
     }
-
-    /* Slider positions */
     #residentialToggle:checked ~ .slider { left: 4px; }
     #commercialToggle:checked   ~ .slider { left: calc(33.333% + 4px); }
     #storefrontToggle:checked   ~ .slider { left: calc(66.666% + 4px); }
-
-    /* Active label text color */
     #residentialToggle:checked + label,
     #commercialToggle:checked   + label,
     #storefrontToggle:checked   + label { color: #ffffff; }
 
     .form-wrapper {
-      background: rgba(255, 255, 255, 0.95);
-      padding: 30px;
-      border-radius: 25px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-      max-width: 550px;
-      margin: auto;
-      max-height: 80vh;
-      overflow-y: auto;
+      background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 25px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15); max-width: 550px; margin: auto;
+      max-height: 80vh; overflow-y: auto;
     }
 
     label { display: block; font-weight: 600; margin-top: 15px; }
-
     input, select {
-      width: 100%;
-      padding: 12px;
-      border-radius: 25px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-      box-sizing: border-box;
+      width: 100%; padding: 12px; border-radius: 25px; border: 1px solid #ccc; font-size: 16px; box-sizing: border-box;
     }
-
     button {
-      margin-top: 20px;
-      padding: 14px;
-      width: 100%;
-      font-size: 16px;
-      font-weight: bold;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      transition: all 0.3s ease;
+      margin-top: 20px; padding: 14px; width: 100%; font-size: 16px; font-weight: bold;
+      border: none; border-radius: 25px; cursor: pointer; transition: all 0.3s ease;
     }
-
     #calculateBtn, #calculateBtn-c, #calculateBtn-s { background-color: #00aaff; color: white; }
     #calculateBtn:hover, #calculateBtn-c:hover, #calculateBtn-s:hover { background-color: #0094d9; }
     #submitBtn, #submitBtn-c, #submitBtn-s { background-color: #00cc66; color: white; }
     #submitBtn:hover, #submitBtn-c:hover, #submitBtn-s:hover { background-color: #00b35a; }
 
     .quoteOutput {
-      margin-top: 25px;
-      font-size: 22px;
-      text-align: center;
-      color: #007700;
-      font-weight: bold;
-      animation: fadeIn 1s ease-in-out;
+      margin-top: 25px; font-size: 22px; text-align: center; color: #007700; font-weight: bold; animation: fadeIn 1s ease-in-out;
     }
-
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity:0; transform: translateY(10px);} to { opacity:1; transform: translateY(0);} }
 
     .form-section { display: none; }
     .form-section.active { display: block; }
@@ -159,52 +103,36 @@
 
   <div class="form-wrapper">
 
-    <!-- Residential Form -->
+    <!-- Residential -->
     <form id="residential" class="form-section active">
       <input type="hidden" name="entry.2076942710" value="Residential" />
-      <label>Your Name:</label>
-      <input type="text" name="entry.1932766726" id="customer" required>
-      <label>Address to be Serviced:</label>
-      <input type="text" name="entry.396915930" id="address" required>
-      <label>Contact Info (Phone, Email, or Both):</label>
-      <input type="text" name="entry.1239873862" id="contact" required>
-      <label># of Standard Window Panes:</label>
-      <input type="number" name="entry.823020867" id="standard-panes" required>
-      <label># of Large Window Panes:</label>
-      <input type="number" name="entry.1634670750" id="large-panes" required>
-      <label># of Screens to Clean:</label>
-      <input type="number" name="entry.1503289555" id="screens-clean" required>
-      <label># of Screens to Restore:</label>
-      <input type="number" name="entry.2096928728" id="screens-restore" required>
+      <label>Your Name:</label><input type="text" name="entry.1932766726" id="customer" required>
+      <label>Address to be Serviced:</label><input type="text" name="entry.396915930" id="address" required>
+      <label>Contact Info (Phone, Email, or Both):</label><input type="text" name="entry.1239873862" id="contact" required>
+      <label># of Standard Window Panes:</label><input type="number" name="entry.823020867" id="standard-panes" required>
+      <label># of Large Window Panes:</label><input type="number" name="entry.1634670750" id="large-panes" required>
+      <label># of Screens to Clean:</label><input type="number" name="entry.1503289555" id="screens-clean" required>
+      <label># of Screens to Restore:</label><input type="number" name="entry.2096928728" id="screens-restore" required>
       <label>Window Condition:</label>
       <select name="entry.1179846798" id="window-condition" required>
-        <option value="Good">Good Condition</option>
-        <option value="Moderate">Moderately Soiled</option>
-        <option value="Heavy">Heavily Soiled</option>
-        <option value="Construction">Construction Debris</option>
+        <option value="Good">Good Condition</option><option value="Moderate">Moderately Soiled</option>
+        <option value="Heavy">Heavily Soiled</option><option value="Construction">Construction Debris</option>
       </select>
       <label>Service Frequency:</label>
       <select name="entry.312555390" id="service-frequency" required>
-        <option value="One-off">One-off</option>
-        <option value="Biannual">Twice a Year</option>
-        <option value="Quarterly">Quarterly</option>
+        <option value="One-off">One-off</option><option value="Biannual">Twice a Year</option><option value="Quarterly">Quarterly</option>
       </select>
       <label>Select the Sides of Panes Needing Cleaned:</label>
       <select name="entry.517640240" id="sides-cleaned" required>
-        <option value="Both">Both</option>
-        <option value="Outside Only">Outside Only</option>
-        <option value="Inside Only">Inside Only</option>
+        <option value="Both">Both</option><option value="Outside Only">Outside Only</option><option value="Inside Only">Inside Only</option>
       </select>
       <label>Story Height:</label>
       <select name="entry.1578550565" id="story-height" required>
-        <option value="1">1 Story</option>
-        <option value="2">2 Stories</option>
-        <option value="3+">3+ Stories</option>
+        <option value="1">1 Story</option><option value="2">2 Stories</option><option value="3+">3+ Stories</option>
       </select>
       <label>Hard Water Removal?</label>
       <select name="entry.1843034712" id="hard-water" required>
-        <option value="no">No</option>
-        <option value="Yes">Yes</option>
+        <option value="no">No</option><option value="Yes">Yes</option>
       </select>
       <input type="hidden" name="entry.444104592" id="quote-total" />
       <button type="button" id="calculateBtn" onclick="calculateQuote('residential')">Calculate Quote</button>
@@ -212,52 +140,36 @@
       <div id="quoteOutput" class="quoteOutput"></div>
     </form>
 
-    <!-- Commercial Form -->
+    <!-- Commercial -->
     <form id="commercial" class="form-section">
       <input type="hidden" name="entry.2076942710" value="Commercial" />
-      <label>Your Name and Company Name:</label>
-      <input type="text" name="entry.1932766726" id="customer-c" required>
-      <label>Your Address:</label>
-      <input type="text" name="entry.396915930" id="address-c" required>
-      <label>Contact Info (Phone, Email, or Both):</label>
-      <input type="text" name="entry.1239873862" id="contact-c" required>
-      <label># of Standard Window Panes:</label>
-      <input type="number" name="entry.823020867" id="standard-panes-c" required>
-      <label># of Large Window Panes:</label>
-      <input type="number" name="entry.1634670750" id="large-panes-c" required>
-      <label># of Screens to Clean:</label>
-      <input type="number" name="entry.1503289555" id="screens-clean-c" required>
-      <label># of Screens to Restore:</label>
-      <input type="number" name="entry.2096928728" id="screens-restore-c" required>
+      <label>Your Name and Company Name:</label><input type="text" name="entry.1932766726" id="customer-c" required>
+      <label>Your Address:</label><input type="text" name="entry.396915930" id="address-c" required>
+      <label>Contact Info (Phone, Email, or Both):</label><input type="text" name="entry.1239873862" id="contact-c" required>
+      <label># of Standard Window Panes:</label><input type="number" name="entry.823020867" id="standard-panes-c" required>
+      <label># of Large Window Panes:</label><input type="number" name="entry.1634670750" id="large-panes-c" required>
+      <label># of Screens to Clean:</label><input type="number" name="entry.1503289555" id="screens-clean-c" required>
+      <label># of Screens to Restore:</label><input type="number" name="entry.2096928728" id="screens-restore-c" required>
       <label>Window Condition:</label>
       <select name="entry.1179846798" id="window-condition-c" required>
-        <option value="Good">Good Condition</option>
-        <option value="Moderate">Moderately Soiled</option>
-        <option value="Heavy">Heavily Soiled</option>
-        <option value="Construction">Construction Debris</option>
+        <option value="Good">Good Condition</option><option value="Moderate">Moderately Soiled</option>
+        <option value="Heavy">Heavily Soiled</option><option value="Construction">Construction Debris</option>
       </select>
       <label>Service Frequency:</label>
       <select name="entry.312555390" id="service-frequency-c" required>
-        <option value="One-off">One-off/First Time Clean</option>
-        <option value="Biannual">Twice a Year</option>
-        <option value="Quarterly">Quarterly</option>
+        <option value="One-off">One-off/First Time Clean</option><option value="Biannual">Twice a Year</option><option value="Quarterly">Quarterly</option>
       </select>
       <label>Select the Sides of Panes Needing Cleaned:</label>
       <select name="entry.517640240" id="sides-cleaned-c" required>
-        <option value="Both">Both</option>
-        <option value="Outside Only">Outside Only</option>
-        <option value="Inside Only">Inside Only</option>
+        <option value="Both">Both</option><option value="Outside Only">Outside Only</option><option value="Inside Only">Inside Only</option>
       </select>
       <label>Story Height:</label>
       <select name="entry.1578550565" id="story-height-c" required>
-        <option value="1">1 Story</option>
-        <option value="2">2 Stories</option>
-        <option value="3+">3+ Stories</option>
+        <option value="1">1 Story</option><option value="2">2 Stories</option><option value="3+">3+ Stories</option>
       </select>
       <label>Hard Water Removal?</label>
       <select name="entry.1843034712" id="hard-water-c" required>
-        <option value="no">No</option>
-        <option value="Yes">Yes (+10%)</option>
+        <option value="no">No</option><option value="Yes">Yes (+10%)</option>
       </select>
       <input type="hidden" name="entry.444104592" id="quote-total-c" />
       <button type="button" id="calculateBtn-c" onclick="calculateQuote('commercial')">Calculate Quote</button>
@@ -265,52 +177,36 @@
       <div id="quoteOutput-c" class="quoteOutput"></div>
     </form>
 
-    <!-- Storefront Form (same fields as commercial for now) -->
+    <!-- Storefront -->
     <form id="storefront" class="form-section">
       <input type="hidden" name="entry.2076942710" value="Storefront" />
-      <label>Your Name / Business Name:</label>
-      <input type="text" name="entry.1932766726" id="customer-s" required>
-      <label>Address:</label>
-      <input type="text" name="entry.396915930" id="address-s" required>
-      <label>Contact Info (Phone, Email, or Both):</label>
-      <input type="text" name="entry.1239873862" id="contact-s" required>
-      <label># of Standard Window Panes:</label>
-      <input type="number" name="entry.823020867" id="standard-panes-s" required>
-      <label># of Large Window Panes:</label>
-      <input type="number" name="entry.1634670750" id="large-panes-s" required>
-      <label># of Screens to Clean:</label>
-      <input type="number" name="entry.1503289555" id="screens-clean-s" required>
-      <label># of Screens to Restore:</label>
-      <input type="number" name="entry.2096928728" id="screens-restore-s" required>
+      <label>Your Name / Business Name:</label><input type="text" name="entry.1932766726" id="customer-s" required>
+      <label>Address:</label><input type="text" name="entry.396915930" id="address-s" required>
+      <label>Contact Info (Phone, Email, or Both):</label><input type="text" name="entry.1239873862" id="contact-s" required>
+      <label># of Standard Window Panes:</label><input type="number" name="entry.823020867" id="standard-panes-s" required>
+      <label># of Large Window Panes:</label><input type="number" name="entry.1634670750" id="large-panes-s" required>
+      <label># of Screens to Clean:</label><input type="number" name="entry.1503289555" id="screens-clean-s" required>
+      <label># of Screens to Restore:</label><input type="number" name="entry.2096928728" id="screens-restore-s" required>
       <label>Window Condition:</label>
       <select name="entry.1179846798" id="window-condition-s" required>
-        <option value="Good">Good Condition</option>
-        <option value="Moderate">Moderately Soiled</option>
-        <option value="Heavy">Heavily Soiled</option>
-        <option value="Construction">Construction Debris</option>
+        <option value="Good">Good Condition</option><option value="Moderate">Moderately Soiled</option>
+        <option value="Heavy">Heavily Soiled</option><option value="Construction">Construction Debris</option>
       </select>
       <label>Service Frequency:</label>
       <select name="entry.312555390" id="service-frequency-s" required>
-        <option value="One-off">One-off/First Time Clean</option>
-        <option value="Biannual">Twice a Year</option>
-        <option value="Quarterly">Quarterly</option>
+        <option value="One-off">One-off/First Time Clean</option><option value="Biannual">Twice a Year</option><option value="Quarterly">Quarterly</option>
       </select>
       <label>Select the Sides of Panes Needing Cleaned:</label>
       <select name="entry.517640240" id="sides-cleaned-s" required>
-        <option value="Both">Both</option>
-        <option value="Outside Only">Outside Only</option>
-        <option value="Inside Only">Inside Only</option>
+        <option value="Both">Both</option><option value="Outside Only">Outside Only</option><option value="Inside Only">Inside Only</option>
       </select>
       <label>Story Height:</label>
       <select name="entry.1578550565" id="story-height-s" required>
-        <option value="1">1 Story</option>
-        <option value="2">2 Stories</option>
-        <option value="3+">3+ Stories</option>
+        <option value="1">1 Story</option><option value="2">2 Stories</option><option value="3+">3+ Stories</option>
       </select>
       <label>Hard Water Removal?</label>
       <select name="entry.1843034712" id="hard-water-s" required>
-        <option value="no">No</option>
-        <option value="Yes">Yes (+10%)</option>
+        <option value="no">No</option><option value="Yes">Yes (+10%)</option>
       </select>
       <input type="hidden" name="entry.444104592" id="quote-total-s" />
       <button type="button" id="calculateBtn-s" onclick="calculateQuote('storefront')">Calculate Quote</button>
@@ -327,10 +223,7 @@
     }
 
     function calculateQuote(mode = 'residential') {
-      const prefix =
-        mode === 'commercial' ? '-c' :
-        mode === 'storefront' ? '-s' : '';
-
+      const prefix = mode === 'commercial' ? '-c' : (mode === 'storefront' ? '-s' : '');
       const get = id => document.getElementById(id + prefix);
       const standard = parseInt(get("standard-panes").value) || 0;
       const large = parseInt(get("large-panes").value) || 0;
@@ -352,65 +245,37 @@
       if (height === "2") total *= 1.12;
       else if (height === "3+") total *= 1.25;
       if (hardwater === "Yes") total *= 1.20;
-
-      /* Treat storefront like commercial (same multiplier as your current code) */
       if (mode === 'commercial' || mode === 'storefront') total *= 0.35;
 
       total = total.toFixed(2);
       get("quote-total").value = total;
 
-      const outputId =
-        mode === 'commercial' ? "quoteOutput-c" :
-        mode === 'storefront' ? "quoteOutput-s" : "quoteOutput";
+      const outputId = mode === 'commercial' ? "quoteOutput-c" : (mode === 'storefront' ? "quoteOutput-s" : "quoteOutput");
       document.getElementById(outputId).textContent = "Estimated Quote: $" + total;
     }
 
-    /* ONLY THIS FUNCTION CHANGED: it now posts JSON to your Apps Script Web App */
+    /* Original Save (Google Form) — unchanged */
     function submitForm() {
       const activeForm = document.querySelector(".form-section.active");
-      const mode = activeForm.id; // 'residential' | 'commercial' | 'storefront'
-
-      // ensure Calculate was clicked
       const quoteInput = activeForm.querySelector('input[name="entry.444104592"]');
-      const quote = quoteInput ? quoteInput.value : '';
+      const quote = quoteInput.value;
       if (!quote) {
         alert("Please calculate the quote first.");
         return;
       }
 
-      const suffix = mode === 'commercial' ? '-c' : (mode === 'storefront' ? '-s' : '');
-      const get = id => document.getElementById(id + suffix);
-
-      const payload = {
-        standard:       parseInt(get("standard-panes").value) || 0,
-        large:          parseInt(get("large-panes").value) || 0,
-        screensClean:   parseInt(get("screens-clean").value) || 0,
-        screensRestore: parseInt(get("screens-restore").value) || 0,
-        condition:      get("window-condition").value,
-        frequency:      get("service-frequency").value,
-        sides:          get("sides-cleaned").value,
-        height:         get("story-height").value,
-        hardwater:      get("hard-water").value,
-        total:          parseFloat(get("quote-total").value || 0),
-        address:        get("address").value,
-        company:        get("customer").value,
-        contact:        get("contact").value
-      };
-
-      // IMPORTANT: no headers, use no-cors to avoid preflight from GitHub Pages
-      fetch("https://script.google.com/macros/s/AKfycbxilR3AlQa9BSSCy5bqNa6CYS2i8A9Av6lYHuIRnqx_CLwYEmTPJpp3ps5Aq5v9kQxV/exec", {
+      const formData = new FormData(activeForm);
+      fetch("https://docs.google.com/forms/d/e/1FAIpQLSfnlHSL3hgL6tLEMw-DXjM_xdvTlSVkMOiq8ZzxWhUgdOnm5Q/formResponse", {
         method: "POST",
         mode: "no-cors",
-        body: JSON.stringify(payload)
-      })
-      .then(() => {
+        body: formData
+      }).then(() => {
         alert("Quote submitted successfully!");
         activeForm.reset();
         document.getElementById("quoteOutput").textContent = "";
-        const c = document.getElementById("quoteOutput-c"); if (c) c.textContent = "";
-        const s = document.getElementById("quoteOutput-s"); if (s) s.textContent = "";
-      })
-      .catch(() => {
+        document.getElementById("quoteOutput-c").textContent = "";
+        document.getElementById("quoteOutput-s").textContent = "";
+      }).catch(() => {
         alert("Failed to submit. Please try again.");
       });
     }
